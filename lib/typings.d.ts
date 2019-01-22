@@ -79,11 +79,11 @@ declare module 'react-native-local-mongodb' {
     public update(query: Query, doc: Document, options?: UpdateOptions, callback?: UpdateCallback): void;
     public remove(query: Query, options?: RemoveOptions, callback?: RemoveCallback): void;
     public loadDatabaseAsync(): Promise<void>;
-    public findAsync(): Promise<Document[]>;
-    public findOneAsync(): Promise<Document>;
-    public insertAsync(): Promise<Document>;
-    public updateAsync(): Promise<Document>;
-    public removeAsync(): Promise<number>;
+    public findAsync(query: Query): Promise<Document[]>;
+    public findOneAsync(query: Query): Promise<Document>;
+    public insertAsync(newDoc: Document): Promise<Document>;
+    public updateAsync(query: Query, doc: Document, options?: UpdateOptions): Promise<Document>;
+    public removeAsync(query: Query): Promise<number>;
   }
 
   export default Datastore;
