@@ -1,5 +1,3 @@
-import {Query} from "react-native-local-mongodb";
-
 declare module 'react-native-local-mongodb' {
   export interface Options {
     filename?: string;
@@ -42,7 +40,7 @@ declare module 'react-native-local-mongodb' {
     sort(doc: MongoDocument): Cursor<T>;
   }
 
-  export type Query = any;
+  export type Query = object;
   export type Projection = any;
   export type Callback<T = void> = (err: Error | null, value: T) => void;
   export type InsertCallback = (err: Error | null, doc: MongoDocument) => void;
