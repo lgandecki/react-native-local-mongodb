@@ -1,6 +1,7 @@
 
 **Embedded persistent or in memory database for react-native**. API is a subset of MongoDB's (NeDB).
 
+
 ## Installation, tests
 Module name on npm is `react-native-local-mongodb`.
 
