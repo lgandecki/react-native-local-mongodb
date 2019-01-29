@@ -55,7 +55,7 @@ declare module 'react-native-local-mongodb' {
   ) => void;
   export type RemoveCallback = (err: Error | null, numAffected: number) => void;
 
-  export default class Datastore {
+  export default class Datastore<T> {
     constructor(options?: Options);
     public loadDatabase(): void;
     public getAllData(): any[];
@@ -79,10 +79,10 @@ declare module 'react-native-local-mongodb' {
     public update(query: Query, doc: MongoDocument, options?: UpdateOptions, callback?: UpdateCallback): void;
     public remove(query: Query, options?: RemoveOptions, callback?: RemoveCallback): void;
     public loadDatabaseAsync(): Promise<void>;
-    public findAsync(query: Query): Promise<MongoDocument[]>;
-    public findOneAsync(query: Query): Promise<MongoDocument>;
-    public insertAsync(newDoc: MongoDocument): Promise<MongoDocument>;
-    public updateAsync(query: Query, doc: MongoDocument, options?: UpdateOptions): Promise<MongoDocument>;
+    public findAsync(query: Query): Promise<T[]>;
+    public findOneAsync(query: Query): Promise<T>;
+    public insertAsync(newDoc: T): Promise<T>;
+    public updateAsync(query: Query, doc: Partial<T>, options?: UpdateOptions): Promise<T>;
     public removeAsync(query: Query, options?: RemoveOptions): Promise<number>;
   }
 }
