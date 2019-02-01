@@ -55,6 +55,25 @@ declare module 'react-native-local-mongodb' {
   ) => void;
   export type RemoveCallback = (err: Error | null, numAffected: number) => void;
 
+  type UpdateQuery<T> = {
+    $inc?: { [P in keyof T]?: number } | { [key: string]: number };
+    $min?: { [P in keyof T]?: number } | { [key: string]: number };
+    $max?: { [P in keyof T]?: number } | { [key: string]: number };
+    $mul?: { [P in keyof T]?: number } | { [key: string]: number };
+    $set?: Partial<T> | { [key: string]: any };
+    $setOnInsert?: Partial<T> | { [key: string]: any };
+    $unset?: { [P in keyof T]?: '' } | { [key: string]: '' };
+    $rename?: { [key: string]: keyof T } | { [key: string]: string };
+    $currentDate?: { [P in keyof T]?: (true | { $type: 'date' | 'timestamp' }) } | { [key: string]: (true | { $type: 'date' | 'timestamp' }) };
+    $addToSet?: Partial<T> | { [key: string]: any };
+    $pop?: { [P in keyof T]?: -1 | 1 } | { [key: string]: -1 | 1 };
+    $pull?: Partial<T> | { [key: string]: Condition<T, keyof T> };
+    $push?: Partial<T> | { [key: string]: any };
+    $pushAll?: Partial<T> | { [key: string]: Array<any> };
+    $each?: Partial<T> | { [key: string]: Array<any> };
+    $bit?: { [P in keyof T]?: any } | { [key: string]: any };
+  };
+
   export default class Datastore<T> {
     constructor(options?: Options);
     public loadDatabase(): void;
@@ -82,7 +101,7 @@ declare module 'react-native-local-mongodb' {
     public findAsync(query: Query): Promise<T[]>;
     public findOneAsync(query: Query): Promise<T>;
     public insertAsync(newDoc: T): Promise<T>;
-    public updateAsync(query: Query, doc: Partial<T>, options?: UpdateOptions): Promise<T>;
+    public updateAsync(query: Query, doc: T | UpdateQuery<T>, options?: UpdateOptions): Promise<T>;
     public removeAsync(query: Query, options?: RemoveOptions): Promise<number>;
   }
 }
